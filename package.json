@@ -1,0 +1,15 @@
+{
+  "name": "mail_receiver",
+  "version": "0.0.0",
+  "description": "Listen to an imap server and push mail to an API endpoint",
+  "main": "listenForMail.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brant Steen",
+  "license": "ISC",
+  "dependencies": {
+    "requestify": "~0.1.16",
+    "mail-listener2": "~0.1.3"
+  }
+}
