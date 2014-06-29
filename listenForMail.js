@@ -27,7 +27,7 @@ var mailListenerConnect = function(){
 
 		var t = setTimeout(function(){
 			mailListenerConnect();
-		}, 10000);
+		}, 30000);
 	}
 };
 mailListenerConnect();
@@ -62,15 +62,14 @@ mailListener.on("mail", function(mail){
 			email: from,
 			subject: subject,
 			text: text,
-			html: html,
-
+			html: html
 		},
 		dataType: 'form-url-encoded'
 	}).then(function(response){
 		console.log(response);
 	});
 
-	console.log("Saved item from " + from);
+	console.log("Saved item from " + from + ": " + subject);
 });
 
 
