@@ -22,6 +22,7 @@ var mailListenerConnect = function(){
 			fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
 		});
 
+		console.log(new Date());
 		console.log("Attempting to connect to IMAP listener...");
 		mailListener.start(); // start listening
 
