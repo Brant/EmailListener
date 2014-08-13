@@ -16,6 +16,7 @@ var child;
 
 child = exec("ps -u brant -o rss,command | grep -v peruser | awk '{sum+=$1} END {print sum/1024}'", function (error, stdout, stderr) {
 	console.log('Memory Usage: ' + stdout);
+	console.log("STDERR: " + stderr);
 });
 
 var mailListenerConnect = function(){
