@@ -6,8 +6,17 @@
 var config = require('./config');
 var requestify = require('requestify');
 var MailListener = require("mail-listener2");
+var sys = require('sys');
+var exec = require('child_process').exec;
+
 var mailListener;
 var connectedToMail = false;
+
+var child;
+
+child = exec("pwd", function (error, stdout, stderr) {
+	console.log('stdout: ' + stdout);
+});
 
 var mailListenerConnect = function(){
 	if (!connectedToMail){
