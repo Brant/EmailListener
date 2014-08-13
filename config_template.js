@@ -1,3 +1,5 @@
+exports.userRunsProcess = "";
+
 exports.mailUsername = "";
 exports.mailPassword = "";
 exports.mailHost = "";

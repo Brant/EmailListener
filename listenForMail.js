@@ -13,11 +13,12 @@ var mailListener;
 var connectedToMail = false;
 
 var child;
+var logMemory = function(){
+	child = exec("ps -u " + config.userRunsProcess + " -o rss,command | grep -v peruser | awk '{sum+=$1} END {print sum/1024}'", function (error, stdout, stderr) {
+		console.log('Memory Usage: ' + stdout);
+	});
+};
 
-child = exec("ps -u brant -o rss,command | grep -v peruser | awk '{sum+=$1} END {print sum/1024}'", function (error, stdout, stderr) {
-	console.log('Memory Usage: ' + stdout);
-	console.log("STDERR: " + stderr);
-});
 
 var mailListenerConnect = function(){
 	if (!connectedToMail){
@@ -34,6 +35,7 @@ var mailListenerConnect = function(){
 
 		console.log(new Date());
 		console.log("Attempting to connect to IMAP listener...");
+		logMemory();
 		mailListener.start(); // start listening
 
 		var t = setTimeout(function(){
@@ -45,11 +47,13 @@ mailListenerConnect();
 
 mailListener.on("server:connected", function(){
 	console.log("IMAP Listener Connected");
+	logMemory();
 	connectedToMail = true;
 });
 
 mailListener.on("server:disconnected", function(){
 	console.log("IMAP Listener Disconnected");
+	logMemory();
 	mailListener.stop();
 	connectedToMail = false;
 	mailListenerConnect();
