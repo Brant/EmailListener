@@ -19,36 +19,6 @@ var logMemory = function(){
 };
 
 
-var mailListenerConnect = function(){
-
-	if (!connectedToMail){
-		mailListener = getMailListener();
-
-		console.log(new Date());
-		console.log("Attempting to connect to IMAP listener...");
-
-		logMemory();
-		mailListener.start(); // start listening
-
-		var t = setTimeout(function(){
-			mailListenerConnect();
-		}, 30000);
-	}
-};
-
-mailListenerConnect();
-
-
-var timedDisconnect = function(mailListener){
-	if (connectedToMail){
-		var dt = setTimeout(function(){
-			console.log("Timed Disconnect...");
-			mailListener.stop();
-		}, 120000);
-	}
-};
-
-
 var getMailListener = function(){
 
 	var mailListener = new MailListener({
@@ -107,4 +77,35 @@ var getMailListener = function(){
 	});
 
 	return mailListener;
+};
+
+
+
+var mailListenerConnect = function(){
+
+	if (!connectedToMail){
+		mailListener = getMailListener();
+
+		console.log(new Date());
+		console.log("Attempting to connect to IMAP listener...");
+
+		logMemory();
+		mailListener.start(); // start listening
+
+		var t = setTimeout(function(){
+			mailListenerConnect();
+		}, 30000);
+	}
+};
+
+mailListenerConnect();
+
+
+var timedDisconnect = function(mailListener){
+	if (connectedToMail){
+		var dt = setTimeout(function(){
+			console.log("Timed Disconnect...");
+			mailListener.stop();
+		}, 120000);
+	}
 };
