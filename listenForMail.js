@@ -63,11 +63,13 @@ mailListener.on("server:disconnected", function(){
 
 
 var timedDisconnect = function(){
-	var dt = setTimeout(function(){
-		console.log("Timed Disconnect...");
-		mailListener.stop();
-		timedDisconnect();
-	}, 120000);
+	if (connectedToMail){
+		var dt = setTimeout(function(){
+			console.log("Timed Disconnect...");
+			mailListener.stop();
+			timedDisconnect();
+		}, 120000);
+	}
 };
 
 
