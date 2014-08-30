@@ -9,7 +9,6 @@ var MailListener = require("mail-listener2");
 var sys = require('sys');
 var exec = require('child_process').exec;
 
-var mailListener;
 var connectedToMail = false;
 
 var child;
@@ -40,7 +39,7 @@ var mailListenerConnect = function(){
 mailListenerConnect();
 
 
-var timedDisconnect = function(){
+var timedDisconnect = function(mailListener){
 	if (connectedToMail){
 		var dt = setTimeout(function(){
 			console.log("Timed Disconnect...");
@@ -50,9 +49,9 @@ var timedDisconnect = function(){
 };
 
 
-
 var getMailListener = function(){
-	mailListener = new MailListener({
+
+	var mailListener = new MailListener({
 		username: config.mailUsername,
 		password: config.mailPassword,
 		host: config.mailHost,
@@ -63,13 +62,12 @@ var getMailListener = function(){
 		fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
 	});
 
-
 	mailListener.on("server:connected", function(){
 		console.log("IMAP Listener Connected");
 		console.log(this);
 		logMemory();
 		connectedToMail = true;
-		timedDisconnect();
+		timedDisconnect(this);
 	});
 
 	mailListener.on("server:disconnected", function(){
