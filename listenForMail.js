@@ -21,6 +21,7 @@ var logMemory = function(){
 
 
 var mailListenerConnect = function(){
+
 	if (!connectedToMail){
 		mailListener = new MailListener({
 			username: config.mailUsername,
@@ -49,6 +50,7 @@ mailListener.on("server:connected", function(){
 	console.log("IMAP Listener Connected");
 	logMemory();
 	connectedToMail = true;
+	timedDisconnect();
 });
 
 mailListener.on("server:disconnected", function(){
@@ -58,6 +60,16 @@ mailListener.on("server:disconnected", function(){
 	connectedToMail = false;
 	mailListenerConnect();
 });
+
+
+var timedDisconnect = function(){
+	var dt = setTimeout(function(){
+		console.log("Timed Disconnect...");
+		mailListener.stop();
+		timedDisconnect();
+	}, 120000);
+};
+
 
 mailListener.on("error", function(err){
 	console.log(err);
