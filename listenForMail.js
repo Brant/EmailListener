@@ -19,20 +19,21 @@ var logMemory = function(){
 	});
 };
 
+mailListener = new MailListener({
+	username: config.mailUsername,
+	password: config.mailPassword,
+	host: config.mailHost,
+	port: config.mailPort,
+	tls: true,
+	mailbox: "INBOX", // mailbox to monitor
+	markSeen: true, // all fetched email willbe marked as seen and not fetched next time
+	fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
+});
+
 
 var mailListenerConnect = function(){
 
 	if (!connectedToMail){
-		mailListener = new MailListener({
-			username: config.mailUsername,
-			password: config.mailPassword,
-			host: config.mailHost,
-			port: config.mailPort,
-			tls: true,
-			mailbox: "INBOX", // mailbox to monitor
-			markSeen: true, // all fetched email willbe marked as seen and not fetched next time
-			fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
-		});
 
 		console.log(new Date());
 		console.log("Attempting to connect to IMAP listener...");
