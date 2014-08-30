@@ -45,7 +45,6 @@ var mailListenerConnect = function(){
 		}, 30000);
 	}
 };
-mailListenerConnect();
 
 mailListener.on("server:connected", function(){
 	console.log("IMAP Listener Connected");
@@ -68,7 +67,6 @@ var timedDisconnect = function(){
 		var dt = setTimeout(function(){
 			console.log("Timed Disconnect...");
 			mailListener.stop();
-			timedDisconnect();
 		}, 120000);
 	}
 };
@@ -102,5 +100,6 @@ mailListener.on("mail", function(mail){
 	console.log("Saved item from " + from + ": " + subject);
 });
 
+mailListenerConnect();
 
 //mailListener.stop(); // stop listening
