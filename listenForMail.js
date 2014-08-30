@@ -3,6 +3,7 @@
  *
  * Listens for mail that comes in and stores its contents
  */
+
 var config = require('./config');
 var requestify = require('requestify');
 var MailListener = require("mail-listener2");
@@ -105,6 +106,6 @@ var timedDisconnect = function(mailListener){
 		var dt = setTimeout(function(){
 			console.log("Timed Disconnect...");
 			mailListener.stop();
-		}, 120000);
+		}, 300000); // 300000 = 5 minutes
 	}
 };
