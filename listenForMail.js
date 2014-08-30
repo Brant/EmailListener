@@ -4,6 +4,10 @@
  * Listens for mail that comes in and stores its contents
  */
 
+console.log("===============================================");
+console.log("=========== Starting Mail Listener ============");
+console.log("===============================================");
+
 var config = require('./config');
 var requestify = require('requestify');
 var MailListener = require("mail-listener2");
