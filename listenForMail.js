@@ -34,7 +34,6 @@ var getMailListener = function(){
 
 	mailListener.on("server:connected", function(){
 		console.log("IMAP Listener Connected");
-		console.log(typeof this);
 		logMemory();
 		connectedToMail = true;
 		timedDisconnect(this);
